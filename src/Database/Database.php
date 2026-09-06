@@ -14,7 +14,13 @@ class Database
     public static function getConnection(): PDO
     {
         if (self::$instance === null) {
-            $dbPath = $_ENV['DATABASE_PATH'] ?? './data/database.sqlite';
+            $projectRoot = dirname(__DIR__, 2);
+            $dbPath = $_ENV['DATABASE_PATH'] ?? $projectRoot . '/data/database.sqlite';
+            
+            $dir = dirname($dbPath);
+            if (!is_dir($dir)) {
+                mkdir($dir, 0755, true);
+            }
             
             if (!file_exists($dbPath)) {
                 touch($dbPath);
