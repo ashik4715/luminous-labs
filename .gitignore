@@ -1,0 +1,5 @@
+/vendor/
+composer.lock
+.env
+/data/*.sqlite
+/data/date_fix_log.json
